@@ -2,12 +2,12 @@
 
 ![Innovatie Proeftuin](./images/proeftuin.png "proeftuin")
 
-De innovatie-proeftuin geeft ons de mogeljkheid om laagdrempelig nieuwe innovatieve ideeen uit te proberen.
+De innovatie-proeftuin biedt ons de mogeljkheid om laagdrempelig nieuwe innovatieve ideeen uit te proberen.
 Doel is om een brede community te voorzien van de proeftuin binnen de publiek/privaat sector en scholen waarbij iedereen apps kan bouwen t.b.v. de sociale domeinen zorg, werk en inkomen met behulp van open source tooling en open standaarden.
 
 ## Functionaliteiten
 
-De proeftuin zet in eerste instantie een single node CaaS op middels docker-machine. De standaard driver die hiervoor gebruikt wordt is VirtualBox voor locale installaties t.b.v. laagdrempelig ontwikkelen op je eigen systeem. Daarnaast is het mogelijk om het script uit naar andere drivers, varieerend van on-prem / (multi)cloud. De multicloud omgeving is te beheren vanuit Rancher 2.0. (de Paas Runtime). Op de Paas draait "Kubernets As A Service." zodat de proeftuin later ook opgeschaald kan worden over meerdere nodes en er geexperimenteerd kan worden met High Performance Computing (HPA).
+De proeftuin zet in eerste instantie een single node CaaS op middels docker-machine. De standaard driver die hiervoor gebruikt wordt is VirtualBox voor locale installaties t.b.v. laagdrempelig ontwikkelen op je eigen systeem. Daarnaast is het mogelijk om het script uit naar andere drivers, varieerend van on-prem / (multi)cloud. De multicloud omgeving is te beheren vanuit Rancher 2.0. (de Paas Runtime). Op de Paas draait "Kubernets As A Service." zodat de proeftuin later ook opgeschaald kan worden over meerdere nodes en er geexperimenteerd kan worden met High Performance Computing (HPC).
 
 ![IaaS CaaS PaaS](./images/iaas-caas-paas.png "Iaas Caas Paas")
 
@@ -51,6 +51,7 @@ Hier zie je een installatiee sessie (bash) opgenomen met asciinema.
 
 - OpenSSL
 - Docker Machine
+- 8GB vrij geheugen.
 
 ### Technologie voor devops
 

@@ -43,7 +43,12 @@ sudo docker-machine scp -r ./cert/proeftuin.key proeftuin:/home/docker/proeftuin
 sudo docker-machine ssh proeftuin docker run \
     --restart=unless-stopped \
     -p 80:80 -p 443:443 \
-	-v /home/docker/proeftuin.crt:/etc/rancher/ssl/cert.pem \
-	-v /home/docker/proeftuin.key:/etc/rancher/ssl/key.pem \
-	-v /home/docker/rootCA.crt:/etc/rancher/ssl/cacerts.pem \
 	rancher/rancher:latest
+
+#sudo docker-machine ssh proeftuin docker run \
+#    --restart=unless-stopped \
+#    -p 80:80 -p 443:443 \
+#	-v /home/docker/proeftuin.crt:/etc/rancher/ssl/cert.pem \
+#	-v /home/docker/proeftuin.key:/etc/rancher/ssl/key.pem \
+#	-v /home/docker/rootCA.crt:/etc/rancher/ssl/cacerts.pem \
+#	rancher/rancher:latest

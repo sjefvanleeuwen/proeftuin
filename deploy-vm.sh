@@ -32,8 +32,6 @@ openssl x509 -in proeftuin.crt -pubkey -noout -outform pem | sha256sum
 openssl req -in proeftuin.csr -pubkey -noout -outform pem | sha256sum 
 cd ..
 
-
-
 echo "copy certs to container as service (Rancher OS) node"
 sudo docker-machine scp -r ./cert/rootCA.crt proeftuin:/home/docker/rootCA.crt
 sudo docker-machine scp -r ./cert/proeftuin.crt proeftuin:/home/docker/proeftuin.crt
@@ -41,7 +39,7 @@ sudo docker-machine scp -r ./cert/proeftuin.key proeftuin:/home/docker/proeftuin
 
 # Install Rancher management layer
 sudo docker-machine ssh proeftuin docker run \
-    --restart=unless-stopped \
+    -d --restart=unless-stopped \
     -p 80:80 -p 443:443 \
 	rancher/rancher:latest
 

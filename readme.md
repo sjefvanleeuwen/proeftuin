@@ -2,12 +2,12 @@
 
 ![Innovatie Proeftuin](./images/proeftuin.png "proeftuin")
 
-De innovatie proeftuin geeft ons de mogeljkheid om laagdrempelig nieuwe innovatieve ideeen uit te proberen.
-Doel is om een brede community te voorzien van de proeftuin binnen de publiek/privaat sector en scholen waarbij iedereen apps kan bouwen t.b.v. de sociale domeinen zorg, werk en inkomen met open source tooling en open standaarden.
+De innovatie-proeftuin geeft ons de mogeljkheid om laagdrempelig nieuwe innovatieve ideeen uit te proberen.
+Doel is om een brede community te voorzien van de proeftuin binnen de publiek/privaat sector en scholen waarbij iedereen apps kan bouwen t.b.v. de sociale domeinen zorg, werk en inkomen met behulp van open source tooling en open standaarden.
 
 ## Functionaliteiten
 
-De proeftuin zet in eerste instantie een single node CaaS op middels docker-machine. De standaard driver die hiervoor gebruikt wordt is VirtualBox voor locale installaties t.b.v. laagdrempelig ontwikkelen. Daarnaast is het mogelijk om het script uit naar andere drivers, varieerend van on-prem / (multi)cloud. De multicloud omgeving is te beheren vanuit Rancher 2.0. (de Paas Runtime)
+De proeftuin zet in eerste instantie een single node CaaS op middels docker-machine. De standaard driver die hiervoor gebruikt wordt is VirtualBox voor locale installaties t.b.v. laagdrempelig ontwikkelen op je eigen systeem. Daarnaast is het mogelijk om het script uit naar andere drivers, varieerend van on-prem / (multi)cloud. De multicloud omgeving is te beheren vanuit Rancher 2.0. (de Paas Runtime). Op de Paas draait "Kubernets As A Service." zodat de proeftuin later ook opgeschaald kan worden over meerdere nodes en er geexperimenteerd kan worden met High Performance Computing (HPA).
 
 ![IaaS CaaS PaaS](./images/iaas-caas-paas.png "Iaas Caas Paas")
 
@@ -22,7 +22,7 @@ Het horizontaal lagen model (5 lagen) van de referentie architectuur met de SaaS
 
 https://github.com/sjefvanleeuwen/fieldlab-reference-architecture
 
-Deze wordt momenteel nog uitgerold als docker containers / infrastructure as code. Deze zullen omgeschreven worden naar Helm Charts voor Kubernetes zodat ze ook gemanaged beheerd kunnen worden vanuit de Rancher Catalog.
+Deze wordt momenteel nog uitgerold als docker containers / infrastructure as code. Deze zullen omgeschreven worden naar Helm Charts voor Kubernetes zodat ze ook gemanaged kunnen worden vanuit de Rancher Catalog.
 
 Voorbeeld van deze store:
 
@@ -52,6 +52,16 @@ Hier zie je een installatiee sessie (bash) opgenomen met asciinema.
 - OpenSSL
 - Docker Machine
 
+### Technologie voor devops
+
+De volgende (open source) technology-stack is beschikbaar na installatie:
+
+- Docker-Machine
+- Rancher 2.0 OS
+- Kubernetes
+- Rancher 2.0
+- OpenFAAS
+
 ### deployment
 
 #### Setup script
@@ -67,15 +77,15 @@ foo@bar:~$ ./deploy-vm.sh
 
 Nadat het script klaar is kun je inloggen op rancher via https://192.168.99.100/ maak een wachtwoord aan in het systeem zoals gevraagd. Ga vervolgens naar het menu: Clusters en creer een Custom Cluster.
 
-![Rancher custom node](./images/custom-node.png)]
+![Rancher custom node](./images/custom-node.png)
 
 Scroll naar beneden en bij "Cluster Name" vul je "proeftuin" in.
 
-![cluster-name](./images/cluster-name.png)]
+![cluster-name](./images/cluster-name.png)
 
 Klik op next en vul vervolgens in het formulier de volgende rollen in etc, control plane en worker aanvinken:
 
-![cluster-name](./images/node-options.png)]
+![cluster-name](./images/node-options.png)
 
 Kopieer het script, deze gaan we iets aangepast uitvoeren in bash via docker-machine.
 
@@ -95,21 +105,56 @@ sudo docker-machine ssh proeftuin docker run -d --privileged --restart=unless-st
 
 In de web browser van Rancher verschijnt na uitvoering het volgende:
 
-![provisioning](./images/provisioning.png)]
+![provisioning](./images/provisioning.png)
 
 Wacht tot de node klaar is met provisioning.
 
-### Technologie voor devops
+#### FaaS installatie
 
-Er wordt gebruik gemaakt van de volgende (open source) technology-stack:
+In Rancher, ga naar de tools/catagalogs sectie. Kies daarna voor Add Catalog.
 
-- Docker-Machine
-- Rancher 2.0 OS
-- Kubernetes
-- Rancher 2.0
-- OpenFAAS
+In de catalog url verwijze we naar:
+https://github.com/openfaas/faas-netes
 
-## Licentie (Licence)
+Faas-netes bevat de Helm Charts om FaaS uit te rollen op het cluster.
 
-Licensed under the EUPL. This project is licensed under the MIT License - see the [LICENSE.md](◄LICENSE.md) file for details.
+![add catalog](./images/add-catalog.png)
+
+Click op Create. na enkele seconde wordt het openfaas active in de catalog lijst met als scope: Global.
+
+![catalog added](./images/added-catalog.png)
+
+Goto Apps, in the Multi-Cluster apps page click on "Launch".
+
+OpenFaaS is now listed in the "App Store". Er zijn twee varianten. Een variant heeft voorgebakken een async pattern ondersteund door Kafka (Apache) voor High performance Computing. "Connect OpenFaaS functions to Kafka topics".
+
+Voor meer informatie over Kafka kun je hier terecht: https://kafka.apache.org/
+
+We pakken voor de proeftuin echter de simpele variant voor nu.
+
+![open faas](./images/openfaas.png)
+
+Click op "View Details". In het formulier, vul het verplichte veld "Name" in met "OpenFaaS". Als Target project selecteer je "Default". Click vervolengs op "Launch"
+
+OpenFaaS wordt nu geinstalleerd als Multi-Cluster App. Binnenkorte tijd veranderd de status van de installatie van "Deployment" naar "Active".
+
+![open faas active](./images/openfaas-active.png)
+
+Om de OpenFaaS installatie te testen kun je naar http://192.168.99.100:31112/ui/ browsen en een voorgedefinieerde function toevoegen vanuit de function app store.
+
+Kies hiervoor "Deploy A New Function". En kies voor "Ascii Cows".
+
+Ga naar de verschenen "Cow" function door erop te klikken en klik in het function scherm op "Invoke" om de functie uit te voeren.
+
+Binnen milliseconden (slechts 0.077 round trip sec op onze machine) verschijnt je eigen COW variant. Tijdens het schrijven van deze documentatie verkregen wij deze variant:
+
+![open faas active](./images/faas-cow.png)
+
+COWS zijn nu als FaaS vrij op te vragen vanuit andere applicatie programmatuur op de op te bouwen SaaS.
+
+Je kunt oook verder experimetneren met FaaS in de app store zoals "Sentiment" waarbij Artificial Intelligence gebruikt wordt om het sentiment aan te geven (weging) in een tekst.
+
+## Licentie (License)
+
+Licensed under the EUPL. This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
 > Copyright © Wigo4it 2019.

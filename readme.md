@@ -2,7 +2,7 @@
 
 ![Innovatie Proeftuin](./images/proeftuin.png "proeftuin")
 
-De innovatie-proeftuin geeft ons de mogeljkheid om laagdrempelig nieuwe innovatieve ideeen uit te proberen.
+De innovatie-proeftuin biedt ons de mogeljkheid om laagdrempelig nieuwe innovatieve ideeen uit te proberen.
 Doel is om een brede community te voorzien van de proeftuin binnen de publiek/privaat sector en scholen waarbij iedereen apps kan bouwen t.b.v. de sociale domeinen zorg, werk en inkomen met behulp van open source tooling en open standaarden.
 
 ## Functionaliteiten

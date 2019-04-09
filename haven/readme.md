@@ -16,6 +16,7 @@ foo@bar:~$ ./deploy-vm.sh
 ```
 
 Haven is nu beschikbaar op: http://192.168.99.110:8761/
+Standaard is het gebruikersnaam/wachtwoord: admin/password
 
 ## Licentie (License)
 

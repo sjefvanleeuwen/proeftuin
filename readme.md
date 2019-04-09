@@ -34,7 +34,7 @@ Voorbeeld van deze store:
 - Support voor meerdere Local de machine / private / public cloud providers
     - VirtualBox
     - VM VSPhere
-    - Google / Amazon / Azure
+    - Google / Amazon / Azure / Digital Ocean
 
 ### Toekomstige versies
 - multi node kubernetes (elasticity)

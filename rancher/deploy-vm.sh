@@ -4,6 +4,10 @@ sudo docker-machine create -d virtualbox \
         --virtualbox-memory 4096 \
     proeftuin
 
+echo "assign static ip"
+sudo ../shared/docker-machine-ipconfig.sh static proeftuin-haven 192.168.99.111
+sudo ../shared/docker-machine-ipconfig.sh ls
+
 mkdir cert
 cd cert
 echo "create root key"
@@ -50,3 +54,6 @@ sudo docker-machine ssh proeftuin docker run \
 #	-v /home/docker/proeftuin.key:/etc/rancher/ssl/key.pem \
 #	-v /home/docker/rootCA.crt:/etc/rancher/ssl/cacerts.pem \
 #	rancher/rancher:latest
+
+# TODO: Rancher Compose our reference architecture SAAS.
+

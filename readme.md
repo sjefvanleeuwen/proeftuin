@@ -7,10 +7,11 @@ Doel is om een brede community te voorzien van de proeftuin binnen de publiek/pr
 
 ## Functionaliteiten
 
-Er zijn 2 soorten proeftuinen
+Er zijn 3 soorten proeftuinen (van eenvoudig naar complexer)
 
+* Een op Docker gebaseerde omgeving met [Portainer](./portainer/readme.md) als managementlaag 
 * Een op Docker (Swarm) gebaseerde omgeving met [HAVEN](./haven/readme.md) als managementlaag 
-* Een op Kubernetes gebaseerde omgeving met [RANCHER 2.0](./rancher/readme.md) als managmentlaag
+* Een op Kubernetes gebaseerde omgeving met [RANCHER 2.0](./rancher/readme.md) als managementlaag
 
 ## Licentie (License)
 

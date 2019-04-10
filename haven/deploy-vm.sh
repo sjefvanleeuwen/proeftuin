@@ -5,8 +5,8 @@ sudo docker-machine create -d virtualbox \
     proeftuin-haven
 
 echo "assign static ip"
-sudo ./docker-machine-ipconfig.sh static proeftuin-haven 192.168.99.110
-sudo ./docker-machine-ipconfig.sh ls
+sudo ../shared/docker-machine-ipconfig.sh static proeftuin-haven 192.168.99.110
+sudo ../shared/docker-machine-ipconfig.sh ls
 
 echo "setup cluster"
 sudo docker-machine ssh proeftuin-haven docker run -d -v /usr/share/ca-certificates/:/etc/ssl/certs \
@@ -23,3 +23,4 @@ sudo docker-machine ssh proeftuin-haven docker run -d --name=cluman -p 8761:8761
 
 echo "register single node"
 sudo docker-machine ssh proeftuin-haven docker run --name havenAgent -d -e "dm_agent_notifier_server=http://192.168.99.110:8761"  --hostname=$(hostname) --restart=unless-stopped -p 8771:8771 -v /run/docker.sock:/run/docker.sock codeabovelab/agent:latest
+

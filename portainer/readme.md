@@ -19,6 +19,10 @@ foo@bar:~$ ./deploy-vm.sh
 2. Prometheus is beschikbaar op: http://192.168.99.112:9090/
 3. Grafana is beschikbaar op: http://192.168.99.112:3000/
 
+## Installatie voorbeeld bash sessie
+
+[![asciicast](https://asciinema.org/a/wgs8mV7VHckQEnJfaJFcxIW3G.svg)](https://asciinema.org/a/wgs8mV7VHckQEnJfaJFcxIW3G)
+
 ### TODO:
 
 De prometheus en grafana moeten nog geconfigureerd worden

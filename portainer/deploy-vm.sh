@@ -1,4 +1,4 @@
-echo "install rancher os container"
+echo "install rancher os container with portainer"
 sudo docker-machine create -d virtualbox \
         --virtualbox-boot2docker-url https://releases.rancher.com/os/latest/rancheros.iso \
         --virtualbox-memory 4096 \
@@ -18,4 +18,4 @@ sudo docker-machine ssh proeftuin-portainer docker run --name docker-compose -v 
 
 echo "deploy monitoring (prometheus) for service endpoints"
 sudo docker-machine scp -r prometheus.yml proeftuin-portainer:/home/docker/prometheus.yml
-sudo docker-machine ssh proeftuin-portainer docker run --name prometheus --network=default_default -p 9090:9090 -v /home/docker/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus
+sudo docker-machine ssh proeftuin-portainer docker run -d --restart always --name prometheus --network=default_default -p 9090:9090 -v /home/docker/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus

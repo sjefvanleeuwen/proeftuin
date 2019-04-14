@@ -2,6 +2,7 @@ echo "install docker machine with rancher o.s. as container"
 sudo docker-machine create -d virtualbox \
         --virtualbox-boot2docker-url https://releases.rancher.com/os/latest/rancheros.iso \
         --virtualbox-memory 4096 \
+        --virtualbox-cpu-count "12" \
     proeftuin
 
 echo "assign static ip"

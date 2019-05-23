@@ -1,0 +1,35 @@
+{
+    "variables": {
+      "password": "rancher",
+      "iso_url": "https://github.com/rancher/k3os/releases/download/v0.2.0/k3os-amd64.iso",
+      "iso_checksum": "33042e2b7c1f530dca5d478c1c546904"
+    },
+    "builders": [{
+      "type": "virtualbox-iso",
+      "boot_wait": "40s",
+      "boot_command": ["rancher","<enter>","wget --no-check-certificate https://raw.githubusercontent.com/sjefvanleeuwen/proeftuin/master/rio/packer/cloud-config.yml","<enter>","sudo os-config","<enter>","1","<enter>","y","<enter>","/home/rancher/cloud-config.yml","<enter>","y","<enter>"],
+      "guest_os_type": "Linux_64",
+      "iso_url": "{{user `iso_url`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "md5",
+      "ssh_username": "rancher",
+      "ssh_password": "{{user `password`}}",
+      "ssh_wait_timeout":"1000s",
+      "disk_size": "8000",
+      "shutdown_command": "sudo poweroff",
+      "post_shutdown_delay": "10s",
+      "format":"ova"
+  
+    }],
+    "provisioners":[
+      {
+        "type": "shell",
+        "execute_command": "{{ .Vars }} sudo -E sh '{{ .Path }}'",
+        "inline": ["echo hello world"]
+      }
+    ],
+    "post-processors": [ 
+      "vagrant"]
+  }
+  
+  
